@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+<record>
+  <date>2021-05-10T12:02:44.905666800Z</date>
+  <millis>1620648164905</millis>
+  <nanos>666800</nanos>
+  <sequence>0</sequence>
+  <logger>Server.sample.Controller</logger>
+  <level>SEVERE</level>
+  <class>Server.sample.Controller</class>
+  <method>lambda$startClicked$0</method>
+  <thread>27</thread>
+  <message>Ошибка</message>
+  <exception>
+    <message>java.net.BindException: Address already in use: bind</message>
+    <frame>
+      <class>sun.nio.ch.Net</class>
+      <method>bind0</method>
+    </frame>
+    <frame>
+      <class>sun.nio.ch.Net</class>
+      <method>bind</method>
+      <line>550</line>
+    </frame>
+    <frame>
+      <class>sun.nio.ch.Net</class>
+      <method>bind</method>
+      <line>539</line>
+    </frame>
+    <frame>
+      <class>sun.nio.ch.NioSocketImpl</class>
+      <method>bind</method>
+      <line>643</line>
+    </frame>
+    <frame>
+      <class>java.net.ServerSocket</class>
+      <method>bind</method>
+      <line>396</line>
+    </frame>
+    <frame>
+      <class>java.net.ServerSocket</class>
+      <method>&lt;init&gt;</method>
+      <line>282</line>
+    </frame>
+    <frame>
+      <class>java.net.ServerSocket</class>
+      <method>&lt;init&gt;</method>
+      <line>173</line>
+    </frame>
+    <frame>
+      <class>Server.sample.Controller</class>
+      <method>lambda$startClicked$0</method>
+      <line>36</line>
+    </frame>
+    <frame>
+      <class>java.lang.Thread</class>
+      <method>run</method>
+      <line>832</line>
+    </frame>
+  </exception>
+</record>

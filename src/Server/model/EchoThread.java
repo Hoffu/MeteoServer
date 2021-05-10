@@ -14,7 +14,7 @@ import java.util.regex.Pattern;
 
 public class EchoThread extends Thread {
     private Socket socket;
-    private ConcurrentHashMap<String, String> cityTemp = new ConcurrentHashMap<>();
+    private ConcurrentHashMap<String, String> cityTemp;
     private static Logger log = Logger.getLogger(EchoThread.class.getName());
 
     public EchoThread(Socket socket, ConcurrentHashMap<String, String> cityTemp) {
@@ -31,17 +31,13 @@ public class EchoThread extends Thread {
             try {
                 BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
                 String temp = bufferedReader.readLine();
-                String inputStr = temp.split("\\+")[0];
-                String city = temp.split("\\+")[1];
-                Pattern tempPattern = Pattern.compile("[0-9]");
-                Pattern cityPattern = Pattern.compile("[a-zA-Z\\u0400-\\u04FF]");
-                Matcher m1 = tempPattern.matcher(inputStr);
-                Matcher m2 = cityPattern.matcher(inputStr);
-                if (m1.find() && !cityTemp.containsKey(city)) {
-                    cityTemp.put(city, inputStr);
-                } else if (m2.find()) {
+                Pattern temperaturePattern = Pattern.compile("[0-9]");
+                Matcher matcher = temperaturePattern.matcher(temp);
+                if (matcher.find()) {
+                    cityTemp.put(temp.split("\\+")[1], temp.split("\\+")[0]);
+                } else {
                     PrintWriter printWriter = new PrintWriter(socket.getOutputStream());
-                    printWriter.write(cityTemp.get(inputStr));
+                    printWriter.write(cityTemp.get(temp));
                     printWriter.flush();
                     printWriter.close();
                 }

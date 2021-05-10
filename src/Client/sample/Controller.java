@@ -40,12 +40,18 @@ public class Controller {
             log.addHandler (txtFile);
 
             socket = new Socket("localhost", 3214);
-            PrintWriter printWriter = new PrintWriter(socket.getOutputStream());
-            printWriter.write(textField.getText() + "+" + city + "\n");
-            printWriter.flush();
-
             Pattern tempPattern = Pattern.compile("[0-9]");
             Matcher matcher = tempPattern.matcher(textField.getText());
+            String output = "";
+            if (matcher.find()) {
+                output = textField.getText() + "+" + city + "\n";
+            } else {
+                output = textField.getText() + "\n";
+            }
+            PrintWriter printWriter = new PrintWriter(socket.getOutputStream());
+            printWriter.write(output);
+            printWriter.flush();
+
             if (!matcher.find()) {
                 BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
                 String temp = bufferedReader.readLine();
