@@ -14,7 +14,7 @@ import java.util.regex.Pattern;
 
 public class EchoThread extends Thread {
     private Socket socket;
-    private ConcurrentHashMap<String, String> cityTemp;
+    private ConcurrentHashMap<String, String> cityTemp; //это сохранение локальное в потоке, работающем с одним Клиентом и доступа к температуре, переданной другими не будет
     private static Logger log = Logger.getLogger(EchoThread.class.getName());
 
     public EchoThread(Socket socket, ConcurrentHashMap<String, String> cityTemp) {
