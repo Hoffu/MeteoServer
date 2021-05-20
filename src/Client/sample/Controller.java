@@ -1,9 +1,11 @@
 package Client.sample;
 
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TextInputDialog;
+import javafx.stage.Stage;
 
 import java.io.*;
 import java.net.Socket;
@@ -20,6 +22,11 @@ public class Controller {
     public TextField textField;
     private static Logger log = Logger.getLogger(Controller.class.getName());
     private String city;
+    private Stage stage;
+
+    public void setPrimaryStage(Stage primaryStage) {
+        this.stage = primaryStage;
+    }
 
     public void initialize() {
         TextInputDialog dialog = new TextInputDialog();
@@ -27,6 +34,9 @@ public class Controller {
         dialog.setHeaderText("Введите свой город");
         Optional<String> result = dialog.showAndWait();
         result.ifPresent(s -> city = s);
+        Platform.runLater(() -> {
+            stage.setTitle(city);
+        });
     }
 
     public void buttonClicked(ActionEvent actionEvent) {
